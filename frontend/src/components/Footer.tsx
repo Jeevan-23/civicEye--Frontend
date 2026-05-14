@@ -1,8 +1,7 @@
-import { MapPin, Mail, Phone, Github, Linkedin, X } from "lucide-react";
+import { Github, Linkedin, X } from "lucide-react";
 import { Button } from "./ui/button";
 import civicIssueLogo from "../assets/civic-issue.png";
 import { Link } from "react-router-dom";
-import { handleSupportClick } from "./SupportModel";
 
 const Footer = () => {
   return (
@@ -105,41 +104,7 @@ const Footer = () => {
                   Terms of Service
                 </a>
               </li>
-              <li>
-                <a
-                  href="#"
-                  onClick={handleSupportClick}
-                  className="text-muted-foreground hover:text-primary transition-colors"
-                >
-                  Contact Us
-                </a>
-              </li>
             </ul>
-          </div>
-
-          {/* Contact */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-foreground">Contact</h4>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <Mail className="h-4 w-4 text-muted-foreground" />
-                <span className="text-muted-foreground">
-                  support@civicreport.com
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="h-4 w-4 text-muted-foreground" />
-                <span className="text-muted-foreground">+91 0123456789</span>
-              </div>
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-4 w-4 text-muted-foreground mt-1" />
-                <span className="text-muted-foreground">
-                  123 Civic Center
-                  <br />
-                  Community City, CC 12345
-                </span>
-              </div>
-            </div>
           </div>
         </div>
 

@@ -3,7 +3,6 @@ import { Button } from "./ui/button.tsx";
 import { LogIn, LogOut, Shield, User } from "lucide-react";
 import civicIssueLogo from "../assets/civic-issue.png";
 import { useAuth } from "../contexts/AuthContext.tsx";
-import { handleSupportClick } from "./SupportModel.tsx";
 
 type HeaderProps = {
   onFeaturesClick?: () => void;
@@ -77,18 +76,6 @@ const Header: React.FC<HeaderProps> = ({
               }}
             >
               How It Works
-            </a>
-
-            <a
-              href="#contact"
-              onClick={handleSupportClick}
-              className="relative text-foreground font-medium transition-all duration-200
-               after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-cyan-500
-               after:transition-all after:duration-200
-               hover:text-cyan-500 hover:after:w-full
-               focus-visible:text-cyan-500 focus-visible:after:w-full outline-none"
-            >
-              Contact
             </a>
           </nav>
 

@@ -52,11 +52,28 @@ const citizen_routes_1 = __importDefault(require("./routes/citizen.routes"));
 const issue_routes_1 = __importDefault(require("./routes/issue.routes"));
 const database_1 = require("./config/database");
 const app = (0, express_1.default)();
+const normalizeOrigin = (origin) => origin.replace(/\/$/, "");
+const allowedOrigins = [
+    process.env.CLIENT_URL,
+    process.env.CORS_ORIGIN,
+    "https://civic-eyee.vercel.app",
+]
+    .filter(Boolean)
+    .map((origin) => normalizeOrigin(origin));
 app.use((0, cors_1.default)({
-    origin: [
-        "http://localhost:5173",
-        "https://civic-eyee.vercel.app",
-    ],
+    origin(origin, callback) {
+        const normalizedOrigin = origin ? normalizeOrigin(origin) : "";
+        const isLocalDevOrigin = !!origin && /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);
+        const isVercelOrigin = !!origin && /^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin);
+        if (!origin ||
+            allowedOrigins.includes(normalizedOrigin) ||
+            isLocalDevOrigin ||
+            isVercelOrigin) {
+            callback(null, true);
+            return;
+        }
+        callback(new Error(`CORS blocked origin: ${origin}`));
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],

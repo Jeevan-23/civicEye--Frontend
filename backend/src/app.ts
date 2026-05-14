@@ -50,12 +50,37 @@ import { connectDB } from "./config/database";
 
 const app = express();
 
+const normalizeOrigin = (origin: string) => origin.replace(/\/$/, "");
+
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  process.env.CORS_ORIGIN,
+  "https://civic-eyee.vercel.app",
+]
+  .filter(Boolean)
+  .map((origin) => normalizeOrigin(origin as string));
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://civic-eyee.vercel.app",
-    ],
+    origin(origin, callback) {
+      const normalizedOrigin = origin ? normalizeOrigin(origin) : "";
+      const isLocalDevOrigin =
+        !!origin && /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(origin);
+      const isVercelOrigin =
+        !!origin && /^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(origin);
+
+      if (
+        !origin ||
+        allowedOrigins.includes(normalizedOrigin) ||
+        isLocalDevOrigin ||
+        isVercelOrigin
+      ) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error(`CORS blocked origin: ${origin}`));
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],

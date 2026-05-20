@@ -72,26 +72,26 @@ const Hero = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t">
+            {/* <div className="grid grid-cols-3 gap-6 pt-8 border-t">
               <div className="text-center">
-                <div className="text-2xl font-bold text-sky-500">2,847</div>
+                <div className="text-2xl font-bold text-sky-500"></div>
                 <div className="text-sm text-muted-foreground">
                   Issues Resolved
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-sky-500">15,239</div>
+                <div className="text-2xl font-bold text-sky-500"></div>
                 <div className="text-sm text-muted-foreground">
                   Active Citizens
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-sky-500">48h</div>
+                <div className="text-2xl font-bold text-sky-500"></div>
                 <div className="text-sm text-muted-foreground">
                   Avg Response
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Right content - Image with hover effects */}
